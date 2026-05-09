@@ -1,5 +1,5 @@
 # envios/forms.py
-from django import偏forms
+from django import forms
 from .models import Encomienda, Cliente, Ruta, Empleado
 from config.choices import EstadoGeneral
 

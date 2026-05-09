@@ -11,6 +11,9 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='auth/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
     
-    # Rutas de nuestra aplicación (el string vacío '' significa la raíz de la web)
+    # --- RUTAS ESPECÍFICAS PRIMERO ---
+    path('api/', include('api.urls')), 
+    
+    # --- RUTA RAÍZ AL FINAL ---
     path('', include('envios.urls')),
 ]
