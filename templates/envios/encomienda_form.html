@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Registrar Nueva Encomienda</h4>
+            </div>
+            <div class="card-body">
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6 mb-3">{{ form.remitente.label_tag }}{{ form.remitente }}</div>
+                        <div class="col-md-6 mb-3">{{ form.destinatario.label_tag }}{{ form.destinatario }}</div>
+                    </div>
+                    <div class="mb-3">{{ form.ruta.label_tag }}{{ form.ruta }}</div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">{{ form.peso_kg.label_tag }}{{ form.peso_kg }}</div>
+                        <div class="col-md-6 mb-3">{{ form.volumen_cm3.label_tag }}{{ form.volumen_cm3 }}</div>
+                    </div>
+                    <div class="mb-3">{{ form.descripcion.label_tag }}{{ form.descripcion }}</div>
+                    <div class="mb-3">{{ form.empleado_registro.label_tag }}{{ form.empleado_registro }}</div>
+                    <div class="mb-3">{{ form.observaciones.label_tag }}{{ form.observaciones }}</div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                        <a href="{% url 'encomienda_list' %}" class="btn btn-light me-md-2">Cancelar</a>
+                        <button type="submit" class="btn btn-primary">Guardar Encomienda</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

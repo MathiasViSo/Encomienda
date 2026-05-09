@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="mb-4">
+    <a href="{% url 'encomienda_list' %}" class="btn btn-link text-decoration-none"><i class="fas fa-arrow-left"></i> Volver al listado</a>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card shadow mb-4">
+            <div class="card-header bg-dark text-white d-flex justify-content-between">
+                <h5 class="mb-0">Información de Encomienda: {{ encomienda.codigo }}</h5>
+                <span class="badge bg-warning text-dark">{{ encomienda.get_estado_display }}</span>
+            </div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-sm-6">
+                        <h6>Remitente</h6>
+                        <p>{{ encomienda.remitente.nombre_completo }}<br><small class="text-muted">Doc: {{ encomienda.remitente.nro_doc }}</small></p>
+                    </div>
+                    <div class="col-sm-6">
+                        <h6>Destinatario</h6>
+                        <p>{{ encomienda.destinatario.nombre_completo }}<br><small class="text-muted">Doc: {{ encomienda.destinatario.nro_doc }}</small></p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-4"><strong>Peso:</strong> {{ encomienda.peso_kg }} kg</div>
+                    <div class="col-sm-4"><strong>Costo:</strong> S/ {{ encomienda.costo_envio }}</div>
+                    <div class="col-sm-4"><strong>Ruta:</strong> {{ encomienda.ruta.origen }} - {{ encomienda.ruta.destino }}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow">
+            <div class="card-header bg-secondary text-white"><h5>Historial de Estados</h5></div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    {% for h in historial %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <strong>{{ h.get_estado_nuevo_display }}</strong><br>
+                            <small class="text-muted">{{ h.observacion }}</small>
+                        </div>
+                        <div class="text-end">
+                            <span class="badge bg-light text-dark">{{ h.fecha_cambio|date:"d/m/Y H:i" }}</span><br>
+                            <small>{{ h.empleado.nombres }}</small>
+                        </div>
+                    </li>
+                    {% empty %}
+                    <li class="list-group-item text-center">No hay cambios registrados.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
